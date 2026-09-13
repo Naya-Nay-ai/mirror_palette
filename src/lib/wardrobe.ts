@@ -27,7 +27,12 @@ export const SHAPES = {
 export type Look = {
   [K in Category]: { shape: (typeof SHAPES)[K][number]["id"]; color: string };
 };
-export type SavedLook = { id: string; name: string; savedAt: string; look: Look };
+export type SavedLook = {
+  id: string;
+  name: string;
+  savedAt: string;
+  look: Look;
+};
 
 export const SAMPLE_LOOK: Look = {
   top: { shape: "blouse", color: "#F3EFE5" },
@@ -55,7 +60,12 @@ export const STORAGE_KEY = "mirror-palette:saved-looks:v1";
 export function normalizeHex(value: string): string | null {
   const hex = value.trim().replace(/^#/, "");
   if (/^[0-9a-f]{6}$/i.test(hex)) return `#${hex.toUpperCase()}`;
-  if (/^[0-9a-f]{3}$/i.test(hex)) return `#${hex.split("").map((c) => c + c).join("").toUpperCase()}`;
+  if (/^[0-9a-f]{3}$/i.test(hex))
+    return `#${hex
+      .split("")
+      .map((c) => c + c)
+      .join("")
+      .toUpperCase()}`;
   return null;
 }
 
@@ -67,8 +77,12 @@ export function isLook(value: unknown): value is Look {
   if (!isRecord(value)) return false;
   return CATEGORIES.every((category) => {
     const item = value[category];
-    return isRecord(item) && SHAPES[category].some((shape) => shape.id === item.shape)
-      && typeof item.color === "string" && /^#[0-9a-f]{6}$/i.test(item.color);
+    return (
+      isRecord(item) &&
+      SHAPES[category].some((shape) => shape.id === item.shape) &&
+      typeof item.color === "string" &&
+      /^#[0-9a-f]{6}$/i.test(item.color)
+    );
   });
 }
 
@@ -76,19 +90,34 @@ export function isLook(value: unknown): value is Look {
 export function readSavedLooks(raw: string | null): SavedLook[] {
   if (!raw) return [];
   const data: unknown = JSON.parse(raw);
-  if (!isRecord(data) || data.version !== 1 || !Array.isArray(data.looks)) throw new Error("invalid-storage");
+  if (!isRecord(data) || data.version !== 1 || !Array.isArray(data.looks))
+    throw new Error("invalid-storage");
   const ids = new Set<string>();
-  if (!data.looks.every((item: unknown) => {
-    if (!isRecord(item) || typeof item.id !== "string" || !item.id || ids.has(item.id)
-      || typeof item.name !== "string" || typeof item.savedAt !== "string" || !isLook(item.look)) return false;
-    ids.add(item.id);
-    return true;
-  })) throw new Error("invalid-look");
+  if (
+    !data.looks.every((item: unknown) => {
+      if (
+        !isRecord(item) ||
+        typeof item.id !== "string" ||
+        !item.id ||
+        ids.has(item.id) ||
+        typeof item.name !== "string" ||
+        typeof item.savedAt !== "string" ||
+        !isLook(item.look)
+      )
+        return false;
+      ids.add(item.id);
+      return true;
+    })
+  )
+    throw new Error("invalid-look");
   return data.looks as SavedLook[];
 }
 
 export function colorName(color: string): string {
-  return PRESETS.find((preset) => preset.color === color.toUpperCase())?.name ?? "Custom color";
+  return (
+    PRESETS.find((preset) => preset.color === color.toUpperCase())?.name ??
+    "Custom color"
+  );
 }
 
 export function shapeName(category: Category, shape: string): string {
@@ -96,7 +125,11 @@ export function shapeName(category: Category, shape: string): string {
 }
 
 export function inkFor(color: string): string {
-  const channels = [1, 3, 5].map((offset) => parseInt(color.slice(offset, offset + 2), 16) / 255)
-    .map((v) => v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
-  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722 > 0.25 ? "#514A53" : "#FFFFFF";
+  const channels = [1, 3, 5]
+    .map((offset) => parseInt(color.slice(offset, offset + 2), 16) / 255)
+    .map((v) => (v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4));
+  return channels[0] * 0.2126 + channels[1] * 0.7152 + channels[2] * 0.0722 >
+    0.25
+    ? "#514A53"
+    : "#FFFFFF";
 }

@@ -1,2 +1,4 @@
 import PaletteEditor from "@/components/palette-editor";
-export default function Home() { return <PaletteEditor />; }
+export default function Home() {
+  return <PaletteEditor />;
+}
