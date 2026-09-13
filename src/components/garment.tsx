@@ -1,4 +1,5 @@
 import { inkFor, type Category, type Look } from "@/lib/wardrobe";
+import { StylingSilhouettes } from "./styling-silhouettes";
 
 // All editable garment fills are literal sRGB HEX values: no filters or gradients.
 // Shared coordinates keep the editor, shape thumbnails and saved looks consistent.
@@ -179,13 +180,19 @@ export function Outfit({
       role="img"
       aria-label={label}
     >
-      <g fill="#F4F3F1" stroke="#DAD6D3" strokeWidth="1.2">
-        <path d="M158 88 158 99 126 112 Q115 121 110 143 L84 239 Q80 253 85 266 L88 279 Q90 287 95 282 L99 264 98 246 137 165 144 224 132 286 140 345 143 522 Q156 530 169 522 L180 357 191 522 Q204 530 217 522 L220 345 228 286 216 224 223 165 262 246 261 264 265 282 Q270 287 272 279 L275 266 Q280 253 276 239 L250 143 Q245 121 234 112 L202 99 202 88Z" />
-        <path d="M158 88 Q145 76 148 54 Q150 31 180 31 Q210 31 212 54 Q215 76 202 88 Q180 98 158 88Z" />
-      </g>
-      <Garment category="bottom" {...look.bottom} />
-      <Garment category="top" {...look.top} />
-      <Garment category="shoes" {...look.shoes} />
+      {small ? (
+        <>
+          <g fill="#F4F3F1" stroke="#DAD6D3" strokeWidth="1.2">
+            <path d="M158 88 158 99 126 112 Q115 121 110 143 L84 239 Q80 253 85 266 L88 279 Q90 287 95 282 L99 264 98 246 137 165 144 224 132 286 140 345 143 522 Q156 530 169 522 L180 357 191 522 Q204 530 217 522 L220 345 228 286 216 224 223 165 262 246 261 264 265 282 Q270 287 272 279 L275 266 Q280 253 276 239 L250 143 Q245 121 234 112 L202 99 202 88Z" />
+            <path d="M158 88 Q145 76 148 54 Q150 31 180 31 Q210 31 212 54 Q215 76 202 88 Q180 98 158 88Z" />
+          </g>
+          <Garment category="bottom" {...look.bottom} />
+          <Garment category="top" {...look.top} />
+          <Garment category="shoes" {...look.shoes} />
+        </>
+      ) : (
+        <StylingSilhouettes look={look} />
+      )}
     </svg>
   );
 }
