@@ -1,4 +1,9 @@
 import { inkFor, type Category, type Look } from "@/lib/wardrobe";
+import {
+  SILHOUETTE_ASSETS,
+  type SilhouetteAsset,
+} from "@/lib/silhouette-assets";
+import { SilhouetteAssetLayer } from "./silhouette-asset";
 
 // My styling only. Catalog thumbnails and Saved looks keep their original art.
 // These patterns share the original 360 × 580 garment coordinates and item IDs.
@@ -188,6 +193,8 @@ function StylingGarment({
   const pattern = PATTERNS[category][shape];
   if (!pattern) return null;
   const ink = inkFor(color);
+  const assets: Partial<Record<string, SilhouetteAsset>> =
+    SILHOUETTE_ASSETS[category];
   return (
     <g
       data-category={category}
@@ -196,33 +203,42 @@ function StylingGarment({
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <g fill={color} stroke={ink} strokeOpacity={0.27} strokeWidth={1.1}>
-        <path d={pattern.outline} />
-        {pattern.panels?.map((d, index) => (
-          <path key={index} d={d} />
+      <SilhouetteAssetLayer asset={assets[shape]} color={color}>
+        <g fill={color} stroke={ink} strokeOpacity={0.27} strokeWidth={1.1}>
+          <path d={pattern.outline} />
+          {pattern.panels?.map((d, index) => (
+            <path key={index} d={d} />
+          ))}
+        </g>
+        {pattern.sole && (
+          <path
+            d={pattern.sole}
+            fill="#F5F3EF"
+            stroke="#8B858C"
+            strokeWidth={0.8}
+          />
+        )}
+        <g fill="none" stroke={ink} strokeOpacity={0.26} strokeWidth={1.05}>
+          {pattern.seams?.map((d, index) => (
+            <path key={index} d={d} />
+          ))}
+        </g>
+        <g fill="none" stroke={ink} strokeOpacity={0.18} strokeWidth={0.9}>
+          {pattern.folds?.map((d, index) => (
+            <path key={index} d={d} />
+          ))}
+        </g>
+        {pattern.buttons?.map(([cx, cy], index) => (
+          <circle
+            key={index}
+            cx={cx}
+            cy={cy}
+            r={1.25}
+            fill={ink}
+            opacity={0.4}
+          />
         ))}
-      </g>
-      {pattern.sole && (
-        <path
-          d={pattern.sole}
-          fill="#F5F3EF"
-          stroke="#8B858C"
-          strokeWidth={0.8}
-        />
-      )}
-      <g fill="none" stroke={ink} strokeOpacity={0.26} strokeWidth={1.05}>
-        {pattern.seams?.map((d, index) => (
-          <path key={index} d={d} />
-        ))}
-      </g>
-      <g fill="none" stroke={ink} strokeOpacity={0.18} strokeWidth={0.9}>
-        {pattern.folds?.map((d, index) => (
-          <path key={index} d={d} />
-        ))}
-      </g>
-      {pattern.buttons?.map(([cx, cy], index) => (
-        <circle key={index} cx={cx} cy={cy} r={1.25} fill={ink} opacity={0.4} />
-      ))}
+      </SilhouetteAssetLayer>
     </g>
   );
 }
@@ -230,16 +246,18 @@ function StylingGarment({
 export function StylingSilhouettes({ look }: { look: Look }) {
   return (
     <>
-      <g
-        fill="#F4F3F1"
-        stroke="#DAD6D3"
-        strokeWidth={1.1}
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M165 87 C166 95 166 99 161 103 C153 109 142 109 131 115 C121 121 117 134 114 149 C110 169 106 190 102 209 Q98 229 96 242 C93 251 92 260 94 267 L97 276 Q100 281 102 276 L102 266 Q104 269 106 265 L107 253 L108 242 C113 220 121 204 126 185 Q133 166 137 156 C140 171 145 186 145 202 C146 224 139 246 135 265 C129 286 131 309 134 329 C136 355 143 381 145 403 C145 419 140 437 140 452 C140 473 145 493 144 513 L142 527 Q153 533 166 527 C164 510 167 490 167 477 C169 459 163 441 166 424 C171 395 175 370 177 349 Q180 335 183 349 C187 375 190 397 194 424 C197 444 191 462 193 480 Q196 507 194 526 Q204 533 218 527 L216 513 C215 493 220 476 220 455 C221 438 215 420 215 404 C217 381 224 355 226 329 C230 306 230 285 225 265 C221 246 214 224 215 203 C215 186 220 171 223 156 Q231 174 235 188 C240 207 248 224 253 243 L254 254 L254 265 Q256 270 259 266 L258 276 Q260 281 263 276 L267 266 C269 257 266 249 264 241 C262 220 255 198 252 179 L246 149 C243 134 239 122 229 116 C220 110 208 109 199 104 C194 101 194 96 195 87Z" />
-        <path d="M180 34 C160 34 151 44 152 61 C152 76 158 87 170 92 Q180 96 190 92 C202 87 208 76 208 61 C209 44 200 34 180 34Z" />
-      </g>
+      <SilhouetteAssetLayer asset={SILHOUETTE_ASSETS.mannequin} color="#F4F3F1">
+        <g
+          fill="#F4F3F1"
+          stroke="#DAD6D3"
+          strokeWidth={1.1}
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M165 87 C166 95 166 99 161 103 C153 109 142 109 131 115 C121 121 117 134 114 149 C110 169 106 190 102 209 Q98 229 96 242 C93 251 92 260 94 267 L97 276 Q100 281 102 276 L102 266 Q104 269 106 265 L107 253 L108 242 C113 220 121 204 126 185 Q133 166 137 156 C140 171 145 186 145 202 C146 224 139 246 135 265 C129 286 131 309 134 329 C136 355 143 381 145 403 C145 419 140 437 140 452 C140 473 145 493 144 513 L142 527 Q153 533 166 527 C164 510 167 490 167 477 C169 459 163 441 166 424 C171 395 175 370 177 349 Q180 335 183 349 C187 375 190 397 194 424 C197 444 191 462 193 480 Q196 507 194 526 Q204 533 218 527 L216 513 C215 493 220 476 220 455 C221 438 215 420 215 404 C217 381 224 355 226 329 C230 306 230 285 225 265 C221 246 214 224 215 203 C215 186 220 171 223 156 Q231 174 235 188 C240 207 248 224 253 243 L254 254 L254 265 Q256 270 259 266 L258 276 Q260 281 263 276 L267 266 C269 257 266 249 264 241 C262 220 255 198 252 179 L246 149 C243 134 239 122 229 116 C220 110 208 109 199 104 C194 101 194 96 195 87Z" />
+          <path d="M180 34 C160 34 151 44 152 61 C152 76 158 87 170 92 Q180 96 190 92 C202 87 208 76 208 61 C209 44 200 34 180 34Z" />
+        </g>
+      </SilhouetteAssetLayer>
       {/* Trouser hems naturally cover the shoe collar and boot shaft. */}
       <StylingGarment category="shoes" {...look.shoes} />
       <StylingGarment category="bottom" {...look.bottom} />
