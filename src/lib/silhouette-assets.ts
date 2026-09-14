@@ -31,7 +31,14 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
     src: "/silhouettes/mannequin.png",
     frame: { x: 31, y: 54, width: 298.22, height: 506.85 },
   },
-  top: {},
+  top: {
+    blouse: {
+      mode: "mask",
+      src: "/silhouettes/top/blouse-mask.png",
+      detailsSrc: "/silhouettes/top/blouse-lines.png",
+      frame: { x: 86.14, y: 46, width: 187.72, height: 302.48 },
+    },
+  },
   bottom: {},
   shoes: {},
 };
