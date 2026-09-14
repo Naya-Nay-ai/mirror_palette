@@ -26,6 +26,11 @@ type SilhouetteAssets = {
  * Scope: My styling only; saved cards and choice thumbnails keep their art.
  */
 export const SILHOUETTE_ASSETS: SilhouetteAssets = {
+  mannequin: {
+    mode: "image",
+    src: "/silhouettes/mannequin.png",
+    frame: { x: 31, y: 54, width: 298.22, height: 506.85 },
+  },
   top: {},
   bottom: {},
   shoes: {},
