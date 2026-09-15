@@ -203,6 +203,20 @@ function StylingGarment({
       strokeLinecap="round"
       strokeLinejoin="round"
     >
+      {category === "top" && shape === "blouse" && assets.blouse && (
+        <g
+          data-blouse-hands="true"
+          aria-hidden="true"
+          fill="#EAE5DF"
+          stroke="#BEB7AF"
+          strokeWidth={0.7}
+        >
+          {/* Wrist roots sit under the cuffs; a quiet thumb and joined fingers show below. */}
+          <path d="M99 282 L111 284 C110 289 111 293 113 298 L116 303 Q117 306 115 307 Q113 308 111 304 L109 300 L110 311 Q110 315 107 315 C102 313 98 307 97 302 Q95 294 99 282Z" />
+          <path d="M261 282 L249 284 C250 289 249 293 247 298 L244 303 Q243 306 245 307 Q247 308 249 304 L251 300 L250 311 Q250 315 253 315 C258 313 262 307 263 302 Q265 294 261 282Z" />
+          <path d="M100 302 Q101 309 106 312 M260 302 Q259 309 254 312" fill="none" strokeOpacity={0.35} />
+        </g>
+      )}
       <SilhouetteAssetLayer asset={assets[shape]} color={color}>
         <g fill={color} stroke={ink} strokeOpacity={0.27} strokeWidth={1.1}>
           <path d={pattern.outline} />

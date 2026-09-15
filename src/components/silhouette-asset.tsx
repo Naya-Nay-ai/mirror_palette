@@ -31,7 +31,20 @@ export function SilhouetteAssetLayer({
   );
 
   return (
-    <g data-silhouette-asset={asset.src}>
+    <g
+      data-silhouette-asset={asset.src}
+      clipPath={asset.cutoutPath ? `url(#${id}-opening)` : undefined}
+    >
+      {asset.cutoutPath && (
+        <defs>
+          <clipPath id={`${id}-opening`} clipPathUnits="userSpaceOnUse">
+            <path
+              clipRule="evenodd"
+              d={`M${frame.x} ${frame.y} h${frame.width} v${frame.height} h${-frame.width}Z ${asset.cutoutPath}`}
+            />
+          </clipPath>
+        </defs>
+      )}
       {asset.mode === "mask" ? (
         <>
           <defs>
