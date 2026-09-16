@@ -260,7 +260,11 @@ function StylingGarment({
 export function StylingSilhouettes({ look }: { look: Look }) {
   return (
     <>
-      <SilhouetteAssetLayer asset={SILHOUETTE_ASSETS.mannequin} color="#F4F3F1">
+      <SilhouetteAssetLayer
+        asset={SILHOUETTE_ASSETS.mannequin}
+        color="#F4F3F1"
+        clipPath={SILHOUETTE_ASSETS.top[look.top.shape]?.mannequinClipPath}
+      >
         <g
           fill="#F4F3F1"
           stroke="#DAD6D3"

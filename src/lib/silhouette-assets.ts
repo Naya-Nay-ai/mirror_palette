@@ -12,6 +12,8 @@ export type SilhouetteAsset = {
   detailsSrc?: string;
   /** Garment opening in the shared SVG coordinates; clips fill and fixed linework together. */
   cutoutPath?: string;
+  /** Visible body beneath this garment: hide covered shoulders/arms, retain neck and legs. */
+  mannequinClipPath?: string;
   /** Override only for cropped artwork; default is the shared 360 × 580 canvas. */
   frame?: typeof SILHOUETTE_FRAME;
 };
@@ -40,6 +42,10 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       detailsSrc: "/silhouettes/top/blouse-lines.png",
       cutoutPath:
         "M170.31 90.65 L189.69 90.65 L191.97 96.73 L197.1 98.63 C199.57 111.74 193.68 127.13 180 139.1 C166.32 127.13 160.43 111.74 162.9 98.63 L168.03 96.73Z",
+      // The source body's shoulders/arms extend beyond the fitted garment artwork.
+      // Keep the body inside the bodice; blouse-aligned hands are drawn at the cuffs.
+      mannequinClipPath:
+        "M160 54 H200 V140 H216 V235 L226 270 V320 H360 V580 H0 V320 H134 V270 L144 235 V140 H160Z",
       frame: { x: 86.14, y: 46, width: 187.72, height: 302.48 },
     },
   },

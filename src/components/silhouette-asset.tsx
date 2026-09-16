@@ -11,10 +11,13 @@ export function SilhouetteAssetLayer({
   asset,
   color,
   children,
+  clipPath,
 }: {
   asset?: SilhouetteAsset;
   color: string;
   children: ReactNode;
+  /** Optional garment-specific visibility boundary, in shared SVG coordinates. */
+  clipPath?: string;
 }) {
   const id = useId();
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
@@ -33,14 +36,14 @@ export function SilhouetteAssetLayer({
   return (
     <g
       data-silhouette-asset={asset.src}
-      clipPath={asset.cutoutPath ? `url(#${id}-opening)` : undefined}
+      clipPath={clipPath || asset.cutoutPath ? `url(#${id}-opening)` : undefined}
     >
-      {asset.cutoutPath && (
+      {(clipPath || asset.cutoutPath) && (
         <defs>
           <clipPath id={`${id}-opening`} clipPathUnits="userSpaceOnUse">
             <path
               clipRule="evenodd"
-              d={`M${frame.x} ${frame.y} h${frame.width} v${frame.height} h${-frame.width}Z ${asset.cutoutPath}`}
+              d={`${clipPath ?? `M${frame.x} ${frame.y} h${frame.width} v${frame.height} h${-frame.width}Z`} ${asset.cutoutPath ?? ""}`}
             />
           </clipPath>
         </defs>
