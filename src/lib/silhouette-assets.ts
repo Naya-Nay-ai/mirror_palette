@@ -83,6 +83,12 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
     },
   },
   shoes: {
+    boots: {
+      mode: "mask",
+      src: "/silhouettes/shoes/boots-mask.png",
+      detailsSrc: "/silhouettes/shoes/boots-lines.png",
+      frame: { x: 128, y: 450, width: 104, height: 129.95 },
+    },
     sneakers: {
       mode: "mask",
       src: "/silhouettes/shoes/sneakers-mask.png",
