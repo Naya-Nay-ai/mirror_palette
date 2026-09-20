@@ -56,6 +56,12 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
     },
   },
   bottom: {
+    wide: {
+      mode: "mask",
+      src: "/silhouettes/bottom/widepants-mask.png",
+      detailsSrc: "/silhouettes/bottom/widepants-lines.png",
+      frame: { x: 70, y: 241, width: 220, height: 300 },
+    },
     skirt: {
       mode: "mask",
       src: "/silhouettes/bottom/skirt-mask.png",
