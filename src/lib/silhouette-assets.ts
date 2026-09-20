@@ -46,7 +46,7 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       mode: "mask",
       src: "/silhouettes/top/tee-mask.png",
       detailsSrc: "/silhouettes/top/tee-lines.png",
-      frame: { x: 80, y: 80, width: 200, height: 200 },
+      frame: { x: 80, y: 65, width: 200, height: 245 },
     },
     blouse: {
       mode: "mask",
