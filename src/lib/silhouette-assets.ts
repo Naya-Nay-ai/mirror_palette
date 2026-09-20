@@ -36,6 +36,12 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
     frame: { x: 31, y: 54, width: 298.22, height: 506.85 },
   },
   top: {
+    knit: {
+      mode: "mask",
+      src: "/silhouettes/top/knit-mask.png",
+      detailsSrc: "/silhouettes/top/knit-lines.png",
+      frame: { x: 80, y: 44, width: 200, height: 260 },
+    },
     tee: {
       mode: "mask",
       src: "/silhouettes/top/tee-mask.png",
