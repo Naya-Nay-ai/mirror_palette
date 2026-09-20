@@ -62,6 +62,12 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
     },
   },
   bottom: {
+    straight: {
+      mode: "mask",
+      src: "/silhouettes/bottom/straight-mask.png",
+      detailsSrc: "/silhouettes/bottom/straight-lines.png",
+      frame: { x: 76, y: 245, width: 213.01, height: 280 },
+    },
     wide: {
       mode: "mask",
       src: "/silhouettes/bottom/widepants-mask.png",
