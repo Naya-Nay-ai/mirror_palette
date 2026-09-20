@@ -49,6 +49,14 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       frame: { x: 86.14, y: 46, width: 187.72, height: 302.48 },
     },
   },
-  bottom: {},
+  bottom: {
+    skirt: {
+      mode: "mask",
+      src: "/silhouettes/bottom/skirt-mask.png",
+      detailsSrc: "/silhouettes/bottom/skirt-lines.png",
+      // Waist sits beneath the untucked top; the long hem stays inside the mirror.
+      frame: { x: 63.91, y: 175, width: 232.18, height: 374.12 },
+    },
+  },
   shoes: {},
 };
