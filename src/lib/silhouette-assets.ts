@@ -72,14 +72,14 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       mode: "mask",
       src: "/silhouettes/bottom/widepants-mask.png",
       detailsSrc: "/silhouettes/bottom/widepants-lines.png",
-      frame: { x: 70, y: 241, width: 220, height: 300 },
+      frame: { x: 70, y: 229, width: 220, height: 300 },
     },
     skirt: {
       mode: "mask",
       src: "/silhouettes/bottom/skirt-mask.png",
       detailsSrc: "/silhouettes/bottom/skirt-lines.png",
       // Waist sits beneath the untucked top; the long hem stays inside the mirror.
-      frame: { x: 63.91, y: 175, width: 232.18, height: 374.12 },
+      frame: { x: 69.71, y: 175, width: 220.57, height: 355.41 },
     },
   },
   shoes: {
