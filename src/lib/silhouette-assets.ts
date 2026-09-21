@@ -98,7 +98,6 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       mode: "mask",
       src: "/silhouettes/shoes/pumps-mask.png",
       detailsSrc: "/silhouettes/shoes/pumps-lines.png",
-      frame: { x: 128, y: 478, width: 104, height: 104 },
     },
   },
 };
