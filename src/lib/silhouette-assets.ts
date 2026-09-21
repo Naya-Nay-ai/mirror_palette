@@ -46,7 +46,7 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       mode: "mask",
       src: "/silhouettes/top/tee-mask.png",
       detailsSrc: "/silhouettes/top/tee-lines.png",
-      frame: { x: 80, y: 65, width: 200, height: 245 },
+      frame: { x: 92.5, y: 71.93, width: 175, height: 214.38 },
     },
     blouse: {
       mode: "mask",
@@ -72,14 +72,14 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       mode: "mask",
       src: "/silhouettes/bottom/widepants-mask.png",
       detailsSrc: "/silhouettes/bottom/widepants-lines.png",
-      frame: { x: 70, y: 229, width: 220, height: 300 },
+      frame: { x: 70, y: 184, width: 220, height: 300 },
     },
     skirt: {
       mode: "mask",
       src: "/silhouettes/bottom/skirt-mask.png",
       detailsSrc: "/silhouettes/bottom/skirt-lines.png",
       // Waist sits beneath the untucked top; the long hem stays inside the mirror.
-      frame: { x: 69.71, y: 175, width: 220.57, height: 355.41 },
+      frame: { x: 69.71, y: 147.5, width: 220.57, height: 355.41 },
     },
   },
   shoes: {
@@ -93,7 +93,7 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       mode: "mask",
       src: "/silhouettes/shoes/sneakers-mask.png",
       detailsSrc: "/silhouettes/shoes/sneakers-lines.png",
-      frame: { x: 120, y: 495, width: 120, height: 80 },
+      frame: { x: 123, y: 485, width: 114, height: 76 },
     },
     pumps: {
       mode: "mask",
