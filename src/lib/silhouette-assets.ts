@@ -18,10 +18,32 @@ export type SilhouetteAsset = {
   frame?: typeof SILHOUETTE_FRAME;
 };
 
+export type PantsBodyOcclusion = {
+  /** All coordinates are after placement, in the shared 360 × 580 canvas. */
+  waistY: number;
+  /** Right-to-left hem boundary, bridging the gap between the legs. */
+  hem: readonly [
+    readonly [number, number],
+    readonly [number, number],
+    ...(readonly [number, number])[],
+  ];
+};
+
+type BottomSilhouetteAsset = SilhouetteAsset &
+  (
+    | { kind: "pants"; bodyOcclusion: PantsBodyOcclusion }
+    | { kind: "skirt"; bodyOcclusion?: never }
+  );
+
 type SilhouetteAssets = {
   mannequin?: SilhouetteAsset;
 } & {
-  [K in Category]: Partial<Record<Look[K]["shape"], SilhouetteAsset>>;
+  [K in Category]: Partial<
+    Record<
+      Look[K]["shape"],
+      K extends "bottom" ? BottomSilhouetteAsset : SilhouetteAsset
+    >
+  >;
 };
 
 /**
@@ -63,17 +85,32 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
   },
   bottom: {
     straight: {
+      kind: "pants",
+      bodyOcclusion: {
+        waistY: 190,
+        hem: [[210, 503], [150, 503]],
+      },
       mode: "mask",
       src: "/silhouettes/bottom/straight-mask.png",
       detailsSrc: "/silhouettes/bottom/straight-lines.png",
     },
     wide: {
+      kind: "pants",
+      bodyOcclusion: {
+        waistY: 190,
+        // Actual cloth hem, not the frame edge (which includes transparent padding).
+        hem: [
+          [214, 466.7], [205, 466.7], [194, 465],
+          [166, 465], [155, 466.7], [146, 466.7],
+        ],
+      },
       mode: "mask",
       src: "/silhouettes/bottom/widepants-mask.png",
       detailsSrc: "/silhouettes/bottom/widepants-lines.png",
       frame: { x: 70, y: 184, width: 220, height: 300 },
     },
     skirt: {
+      kind: "skirt",
       mode: "mask",
       src: "/silhouettes/bottom/skirt-mask.png",
       detailsSrc: "/silhouettes/bottom/skirt-lines.png",

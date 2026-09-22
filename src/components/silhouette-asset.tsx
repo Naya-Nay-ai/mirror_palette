@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState, type ReactNode } from "react";
+import { useEffect, useId, useState, type ReactNode } from "react";
 import {
   SILHOUETTE_FRAME,
   type SilhouetteAsset,
@@ -12,16 +12,51 @@ export function SilhouetteAssetLayer({
   color,
   children,
   clipPath,
+  onReadyChange,
 }: {
   asset?: SilhouetteAsset;
   color: string;
   children: ReactNode;
   /** Optional garment-specific visibility boundary, in shared SVG coordinates. */
   clipPath?: string;
+  /** True only when both artwork layers are loaded and no fallback is active. */
+  onReadyChange?: (src: string, ready: boolean) => void;
 }) {
   const id = useId();
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const [loadedSrc, setLoadedSrc] = useState<string | null>(null);
+  const [loadedDetailsSrc, setLoadedDetailsSrc] = useState<string | null>(null);
+  useEffect(() => {
+    if (!asset || !onReadyChange) return;
+    // SVG image load may precede hydration. Cached probes also cover that case.
+    const sources = [asset.src, ...(asset.detailsSrc ? [asset.detailsSrc] : [])];
+    const probes = sources.map((src, index) => {
+      const image = new Image();
+      image.onload = () => (index === 0 ? setLoadedSrc : setLoadedDetailsSrc)(src);
+      image.onerror = () => {
+        setFailedSrc(asset.src);
+        onReadyChange(asset.src, false);
+      };
+      image.src = src;
+      return image;
+    });
+    return () => {
+      for (const image of probes) image.onload = image.onerror = null;
+    };
+  }, [asset, onReadyChange]);
+  const ready =
+    !!asset && failedSrc !== asset.src && loadedSrc === asset.src &&
+    (!asset.detailsSrc || loadedDetailsSrc === asset.detailsSrc);
+  useEffect(() => {
+    if (asset) onReadyChange?.(asset.src, ready);
+  }, [asset, ready, onReadyChange]);
   if (!asset || failedSrc === asset.src) return <>{children}</>;
+
+  const src = asset.src;
+  function fail() {
+    setFailedSrc(src);
+    onReadyChange?.(src, false);
+  }
 
   const frame = asset.frame ?? SILHOUETTE_FRAME;
   const artwork = (
@@ -29,7 +64,8 @@ export function SilhouetteAssetLayer({
       href={asset.src}
       {...frame}
       preserveAspectRatio="xMidYMid meet"
-      onError={() => setFailedSrc(asset.src)}
+      onLoad={onReadyChange ? () => setLoadedSrc(src) : undefined}
+      onError={fail}
     />
   );
 
@@ -71,7 +107,8 @@ export function SilhouetteAssetLayer({
           href={asset.detailsSrc}
           {...frame}
           preserveAspectRatio="xMidYMid meet"
-          onError={() => setFailedSrc(asset.src)}
+          onLoad={onReadyChange ? () => setLoadedDetailsSrc(asset.detailsSrc ?? null) : undefined}
+          onError={fail}
         />
       )}
     </g>
