@@ -62,7 +62,6 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       mode: "mask",
       src: "/silhouettes/top/knit-mask.png",
       detailsSrc: "/silhouettes/top/knit-lines.png",
-      frame: { x: 80, y: 44, width: 200, height: 260 },
     },
     tee: {
       mode: "mask",
