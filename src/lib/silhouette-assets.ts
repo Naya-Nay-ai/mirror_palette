@@ -35,13 +35,19 @@ type BottomSilhouetteAsset = SilhouetteAsset &
     | { kind: "skirt"; bodyOcclusion?: never }
   );
 
+type ShoeSilhouetteAsset = SilhouetteAsset & {
+  /** Part of the shoe in front of the foot; the complete shoe sits behind it. */
+  frontClipPath: string;
+};
+
 type SilhouetteAssets = {
   mannequin?: SilhouetteAsset;
 } & {
   [K in Category]: Partial<
     Record<
       Look[K]["shape"],
-      K extends "bottom" ? BottomSilhouetteAsset : SilhouetteAsset
+      K extends "bottom" ? BottomSilhouetteAsset
+        : K extends "shoes" ? ShoeSilhouetteAsset : SilhouetteAsset
     >
   >;
 };
@@ -118,18 +124,23 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
   },
   shoes: {
     boots: {
+      frontClipPath: "M0 484 H360 V580 H0Z",
       mode: "mask",
       src: "/silhouettes/shoes/boots-mask.png",
       detailsSrc: "/silhouettes/shoes/boots-lines.png",
       frame: { x: 128, y: 450, width: 104, height: 129.95 },
     },
     sneakers: {
+      frontClipPath: "M0 508 H360 V580 H0Z",
       mode: "mask",
       src: "/silhouettes/shoes/sneakers-mask.png",
       detailsSrc: "/silhouettes/shoes/sneakers-lines.png",
       frame: { x: 123, y: 485, width: 114, height: 76 },
     },
     pumps: {
+      // The heel rim goes behind the ankle; both sidewalls and toes remain visible.
+      frontClipPath:
+        "M0 0H360V580H0Z M153 497 C153 509 152 521 151 531 L150 535 C157 529 164 529 171 535 L170 531 C169 520 169 509 169 497Z M191 497 C191 509 191 520 190 531 L189 535 C196 529 203 529 210 535 L209 531 C208 521 207 509 207 497Z",
       mode: "mask",
       src: "/silhouettes/shoes/pumps-mask.png",
       detailsSrc: "/silhouettes/shoes/pumps-lines.png",

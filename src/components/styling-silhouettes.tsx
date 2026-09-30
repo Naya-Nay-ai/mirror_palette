@@ -282,7 +282,9 @@ function pantsOcclusionPath({ waistY, hem }: PantsBodyOcclusion) {
 
 export function StylingSilhouettes({ look }: { look: Look }) {
   const clipId = `${useId()}-pants-body`;
+  const shoeClipId = `${useId()}-shoe-front`;
   const bottom = SILHOUETTE_ASSETS.bottom[look.bottom.shape];
+  const shoe = SILHOUETTE_ASSETS.shoes[look.shoes.shape];
   const [bottomStatus, setBottomStatus] = useState({
     src: bottom?.src,
     ready: false,
@@ -316,6 +318,15 @@ export function StylingSilhouettes({ look }: { look: Look }) {
           </clipPath>
         </defs>
       )}
+      {shoe && (
+        <defs>
+          <clipPath id={shoeClipId} clipPathUnits="userSpaceOnUse">
+            <path clipRule="evenodd" d={shoe.frontClipPath} />
+          </clipPath>
+        </defs>
+      )}
+      {/* The heel collar sits behind the ankle; the toe and vamp cover the foot. */}
+      {shoe && <StylingGarment category="shoes" {...look.shoes} />}
       <g
         data-pants-occlusion={occlusion ? "active" : undefined}
         clipPath={occlusion ? `url(#${clipId})` : undefined}
@@ -338,8 +349,10 @@ export function StylingSilhouettes({ look }: { look: Look }) {
           </g>
         </SilhouetteAssetLayer>
       </g>
-      {/* Trouser hems naturally cover the shoe collar and boot shaft. */}
-      <StylingGarment category="shoes" {...look.shoes} />
+      {/* Trouser hems still cover the shoe collar and boot shaft. */}
+      <g clipPath={shoe ? `url(#${shoeClipId})` : undefined}>
+        <StylingGarment category="shoes" {...look.shoes} />
+      </g>
       <StylingGarment
         category="bottom"
         {...look.bottom}
