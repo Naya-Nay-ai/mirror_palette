@@ -189,11 +189,13 @@ function StylingGarment({
   category,
   shape,
   color,
+  assetOverride,
   onReadyChange,
 }: {
   category: Category;
   shape: string;
   color: string;
+  assetOverride?: SilhouetteAsset;
   onReadyChange?: (src: string, ready: boolean) => void;
 }) {
   const pattern = PATTERNS[category][shape];
@@ -224,7 +226,7 @@ function StylingGarment({
         </g>
       )}
       <SilhouetteAssetLayer
-        asset={assets[shape]}
+        asset={assetOverride ?? assets[shape]}
         color={color}
         onReadyChange={onReadyChange}
       >
@@ -283,8 +285,12 @@ function pantsOcclusionPath({ waistY, hem }: PantsBodyOcclusion) {
 export function StylingSilhouettes({ look }: { look: Look }) {
   const clipId = `${useId()}-pants-body`;
   const shoeClipId = `${useId()}-shoe-front`;
+  const bootTuckClipId = `${useId()}-boot-tuck`;
   const bottom = SILHOUETTE_ASSETS.bottom[look.bottom.shape];
   const shoe = SILHOUETTE_ASSETS.shoes[look.shoes.shape];
+  const tuckStraightIntoBoots =
+    look.bottom.shape === "straight" && look.shoes.shape === "boots" &&
+    !!shoe?.tuckedWithStraight;
   const [bottomStatus, setBottomStatus] = useState({
     src: bottom?.src,
     ready: false,
@@ -325,8 +331,16 @@ export function StylingSilhouettes({ look }: { look: Look }) {
           </clipPath>
         </defs>
       )}
+      {tuckStraightIntoBoots && (
+        <defs>
+          <clipPath id={bootTuckClipId} clipPathUnits="userSpaceOnUse">
+            <path d="M0 0 H360 V498 H0Z" />
+          </clipPath>
+        </defs>
+      )}
       {/* The heel collar sits behind the ankle; the toe and vamp cover the foot. */}
-      {shoe && <StylingGarment category="shoes" {...look.shoes} />}
+      {shoe && !tuckStraightIntoBoots &&
+        <StylingGarment category="shoes" {...look.shoes} />}
       <g
         data-pants-occlusion={occlusion ? "active" : undefined}
         clipPath={occlusion ? `url(#${clipId})` : undefined}
@@ -350,14 +364,25 @@ export function StylingSilhouettes({ look }: { look: Look }) {
         </SilhouetteAssetLayer>
       </g>
       {/* Trouser hems still cover the shoe collar and boot shaft. */}
-      <g clipPath={shoe ? `url(#${shoeClipId})` : undefined}>
-        <StylingGarment category="shoes" {...look.shoes} />
+      {!tuckStraightIntoBoots && (
+        <g clipPath={shoe ? `url(#${shoeClipId})` : undefined}>
+          <StylingGarment category="shoes" {...look.shoes} />
+        </g>
+      )}
+      <g clipPath={tuckStraightIntoBoots ? `url(#${bootTuckClipId})` : undefined}>
+        <StylingGarment
+          category="bottom"
+          {...look.bottom}
+          onReadyChange={handleBottomReady}
+        />
       </g>
-      <StylingGarment
-        category="bottom"
-        {...look.bottom}
-        onReadyChange={handleBottomReady}
-      />
+      {tuckStraightIntoBoots && (
+        <StylingGarment
+          category="shoes"
+          {...look.shoes}
+          assetOverride={shoe?.tuckedWithStraight}
+        />
+      )}
       <StylingGarment category="top" {...look.top} />
     </>
   );

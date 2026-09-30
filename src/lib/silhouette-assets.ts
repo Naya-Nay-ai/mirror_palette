@@ -38,6 +38,8 @@ type BottomSilhouetteAsset = SilhouetteAsset &
 type ShoeSilhouetteAsset = SilhouetteAsset & {
   /** Part of the shoe in front of the foot; the complete shoe sits behind it. */
   frontClipPath: string;
+  /** Shaft aligned over straight trouser hems when worn tucked in. */
+  tuckedWithStraight?: SilhouetteAsset;
 };
 
 type SilhouetteAssets = {
@@ -128,6 +130,11 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       src: "/silhouettes/shoes/boots-mask.png",
       detailsSrc: "/silhouettes/shoes/boots-lines.png",
       frame: { x: 128, y: 450, width: 104, height: 129.95 },
+      tuckedWithStraight: {
+        mode: "mask",
+        src: "/silhouettes/shoes/boots-tucked-mask.png",
+        detailsSrc: "/silhouettes/shoes/boots-tucked-lines.png",
+      },
     },
     sneakers: {
       frontClipPath: "M0 508 H360 V580 H0Z",
