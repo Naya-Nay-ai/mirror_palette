@@ -84,7 +84,6 @@ export const SILHOUETTE_ASSETS: SilhouetteAssets = {
       // Keep the body inside the bodice; blouse-aligned hands are drawn at the cuffs.
       mannequinClipPath:
         "M160 54 H200 V140 H216 V235 L226 270 V320 H360 V580 H0 V320 H134 V270 L144 235 V140 H160Z",
-      frame: { x: 86.14, y: 46, width: 187.72, height: 302.48 },
     },
   },
   bottom: {
