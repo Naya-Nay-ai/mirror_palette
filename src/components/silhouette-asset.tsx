@@ -71,6 +71,7 @@ export function SilhouetteAssetLayer({
 
   return (
     <g
+      key={JSON.stringify([asset.src, asset.detailsSrc ?? null])}
       data-silhouette-asset={asset.src}
       clipPath={clipPath || asset.cutoutPath ? `url(#${id}-opening)` : undefined}
     >
