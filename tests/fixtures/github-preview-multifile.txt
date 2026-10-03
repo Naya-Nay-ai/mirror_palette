@@ -1,0 +1,1 @@
+Preview integration fixture: one text file and two PNG files in one commit.
