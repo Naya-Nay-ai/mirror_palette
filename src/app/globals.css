@@ -303,7 +303,12 @@ h2 {
   width: 72%;
   max-width: 340px;
   height: 456px;
-  background: #fcfcfb;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    #fff 30%,
+    #f6f6f6 72%,
+    #ededed 100%
+  );
   border: 1px solid #dcd6d7;
   border-radius: 190px 190px 11px 11px;
   box-shadow:
@@ -362,8 +367,8 @@ h2 {
   top: 24%;
 }
 .sparkle-two {
-  right: 4%;
-  bottom: 30%;
+  right: calc(50% - min(36%, 170px) - 22px);
+  bottom: calc(50% - 212px);
   font-size: 25px;
   color: #aaa4bd;
 }
@@ -1098,6 +1103,9 @@ footer > svg {
   .mirror-arch {
     width: 77%;
   }
+  .sparkle-two {
+    right: calc(50% - min(38.5%, 170px) - 22px);
+  }
   .palette-note {
     right: -4px;
     width: 95px;
@@ -1247,7 +1255,8 @@ footer > svg {
     left: 7%;
   }
   .sparkle-two {
-    right: 9%;
+    right: calc(50% - min(30.5%, 145px) - 22px);
+    bottom: calc(50% - 159.5px);
   }
   .look-colors {
     margin-top: 16px;
@@ -1484,8 +1493,8 @@ footer > svg {
   }
   .sparkle-two {
     font-size: 21px;
-    right: 5%;
-    bottom: 24%;
+    right: calc(50% - min(32%, 125px) - 22px);
+    bottom: calc(50% - 137px);
   }
   .stage-caption {
     font-size: 12px;
