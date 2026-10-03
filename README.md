@@ -89,6 +89,6 @@ Vercel Project：`mirror-palette`、Team：`Mirror Room`。
 
 ## 公開・保存の状況
 
-実装は他アプリと分離しています。GitHubへの書き込みは連携側の `403 Resource not accessible by integration` により未完了です。ローカルcommitとソースZIPを用意しています。
+実装は他アプリと分離しています。ソースはGitHubの `preview/mvp` に保存し、既存のGit連携でVercel Previewを自動生成します。
 
 Vercelには `target: preview` を指定しましたが、新規プロジェクトへの最初のデプロイ `dpl_8LUBfGqifwsSSMeNtYsT6DuTpoeU` は、返却状態がProductionになりました。以後は既存の専用Projectを指定し、Previewとして作成しています。最初のProduction扱いのデプロイは、この作業環境に削除機能がないため残っています。既存の他アプリのProductionには変更していません。
