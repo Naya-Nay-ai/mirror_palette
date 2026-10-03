@@ -21,6 +21,8 @@ import {
   Trash2,
 } from "lucide-react";
 import { Outfit, ShapePreview } from "./garment";
+import { MyItems } from "./my-items";
+import { type MyItemSelection } from "@/lib/my-items";
 import {
   CATEGORIES,
   CATEGORY_LABELS,
@@ -226,6 +228,24 @@ export default function PaletteEditor() {
     event.preventDefault();
     setCategory(CATEGORIES[next]);
     document.getElementById(`tab-${CATEGORIES[next]}`)?.focus();
+  }
+  function useMyItem(selection: MyItemSelection) {
+    setLook((previous) => ({
+      ...previous,
+      [selection.category]: { shape: selection.shape, color: selection.color },
+    }));
+    setCategory(selection.category);
+    setEditorRevision((value) => value + 1);
+    setNotice("");
+    editorRef.current?.scrollIntoView({
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+        ? "auto"
+        : "smooth",
+      block: "start",
+    });
+    document
+      .getElementById(`tab-${selection.category}`)
+      ?.focus({ preventScroll: true });
   }
 
   return (
@@ -524,6 +544,11 @@ export default function PaletteEditor() {
             )
           )}
         </div>
+
+        <MyItems
+          current={{ category, shape: current.shape, color: current.color }}
+          onUse={useMyItem}
+        />
 
         <section
           className="saved-section"

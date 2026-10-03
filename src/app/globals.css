@@ -1969,3 +1969,154 @@ footer > svg {
     font-size: 11px;
   }
 }
+
+/* Personal items use the existing catalog and leave editor styling intact. */
+.my-items-section {
+  margin: 16px 0 34px;
+  scroll-margin-top: 26px;
+}
+.my-items-add,
+.my-item-card {
+  padding: 18px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 17px;
+}
+.my-items-current,
+.my-item-color {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.my-items-current {
+  margin-bottom: 14px;
+}
+.my-items-add label {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 14px;
+}
+.my-items-add label > span {
+  margin-left: 4px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.my-items-add-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.my-items-add-row input {
+  flex: 1 1 220px;
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 16px;
+}
+.my-items-hint,
+.my-items-empty {
+  margin-top: 10px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.my-items-feedback {
+  padding: 10px 2px;
+  min-height: 42px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #6b836f;
+}
+.my-items-feedback p {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.my-items-feedback .my-items-error {
+  color: #a24d60;
+}
+.my-items-empty {
+  padding: 20px;
+  margin-top: 0;
+  border: 1px dashed #ddcdda;
+  border-radius: 17px;
+  text-align: center;
+}
+.my-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.my-item-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.my-item-summary .shape-preview {
+  width: 60px;
+  height: 72px;
+  margin: 0;
+}
+.my-item-summary > div {
+  min-width: 0;
+}
+.my-item-summary strong {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+.my-item-summary p {
+  margin: 4px 0 7px;
+  font-size: 12px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.my-item-actions,
+.my-item-delete-confirm {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.my-item-actions {
+  justify-content: space-between;
+  margin-top: 15px;
+}
+.my-item-actions button {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 0;
+  border-radius: 8px;
+  font-size: 12px;
+}
+.my-item-use {
+  background: var(--pink);
+  color: var(--rose-dark);
+}
+.my-item-delete,
+.my-item-delete-confirm button {
+  background: transparent;
+  color: #a24d60;
+}
+.my-item-delete-confirm span {
+  font-size: 12px;
+}
+.my-items-section button:disabled {
+  cursor: not-allowed;
+}
+@media (max-width: 480px) {
+  .my-items-add-row .save-button {
+    width: 100%;
+    white-space: normal;
+  }
+}
