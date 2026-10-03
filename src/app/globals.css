@@ -480,6 +480,9 @@ h2 {
 }
 .editor-card {
   padding: 25px 25px 21px;
+  border-color: transparent;
+  background: transparent;
+  box-shadow: none;
 }
 .editor-title {
   display: flex;
