@@ -254,15 +254,12 @@ export default function PaletteEditor() {
         コーデを編集する
       </a>
       <header className="site-header">
-        <a className="brand" href="#" aria-label="MIRROR_PALETTE ホーム">
+        <a className="brand" href="#" aria-label="MIRROR PALETTE ホーム">
           <span className="brand-mirror" aria-hidden="true">
             <Sparkles size={20} strokeWidth={1.4} />
           </span>
           <span>
-            <span className="brand-name">MIRROR_PALETTE</span>
-            <span className="brand-tagline">
-              Build the shape. Find the color.
-            </span>
+            <span className="brand-name">MIRROR PALETTE</span>
           </span>
         </a>
         <a href="#saved-looks" className="saved-link">
@@ -275,28 +272,19 @@ export default function PaletteEditor() {
       <main>
         <div className="intro">
           <div>
-            <div className="eyebrow">
-              <span /> YOUR LITTLE STYLING STUDIO
-            </div>
             <h1>
-              好きなかたちに、<span>好きな色を。</span>
+              服の形と色を組み合わせて試せます。
               <Sparkles size={24} aria-hidden="true" />
             </h1>
-            <p>服を選んで、色を重ねて。今日の組み合わせを見つけよう。</p>
+            <p>トップス・ボトムス・シューズを選んで、画面で見比べられます。</p>
           </div>
-          <span className="intro-note">
-            a little color,
-            <br />
-            <em>a little you.</em>
-          </span>
         </div>
 
         <div className="workspace" id="editor" ref={editorRef}>
           <section className="preview-card" aria-labelledby="look-heading">
             <div className="preview-heading">
               <div>
-                <span className="eyebrow">THE MIRROR</span>
-                <h2 id="look-heading">My styling</h2>
+                <h2 id="look-heading">編集中のコーデ</h2>
               </div>
               <button
                 className="reset-button"
@@ -313,7 +301,6 @@ export default function PaletteEditor() {
             </div>
             <div className="mirror-stage">
               <div className="mirror-arch">
-                <span className="mirror-label">MIRROR / 01</span>
                 <Outfit look={look} />
                 <span className="mirror-ground" aria-hidden="true" />
               </div>
@@ -333,9 +320,7 @@ export default function PaletteEditor() {
                     />
                   ))}
                 </div>
-                <span>3 colors, one look.</span>
               </div>
-              <span className="stage-caption">a reflection of your colors</span>
             </div>
             <div className="look-colors">
               {CATEGORIES.map((item) => (
@@ -357,7 +342,7 @@ export default function PaletteEditor() {
                     style={{ backgroundColor: look[item].color }}
                   />
                   <span>
-                    <strong>{CATEGORY_LABELS[item].en}</strong>
+                    <strong>{CATEGORY_LABELS[item].ja}</strong>
                     <code>{look[item].color}</code>
                   </span>
                   <ChevronRight size={13} />
@@ -365,15 +350,15 @@ export default function PaletteEditor() {
               ))}
             </div>
             <p className="preview-footnote">
-              色とシルエットを楽しむためのイメージです。
+              色と形の組み合わせを確認するためのイメージです。
             </p>
           </section>
 
           <section className="editor-card" aria-label="コーデの編集パネル">
             <div className="editor-title">
-              <span className="eyebrow">MAKE IT YOURS</span>
+              <span aria-hidden="true" />
               <span>
-                <Palette size={16} /> かたちと色をえらぶ
+                <Palette size={16} /> 形と色を選ぶ
               </span>
             </div>
             <div
@@ -393,10 +378,7 @@ export default function PaletteEditor() {
                   onKeyDown={(event) => selectTab(event, index)}
                 >
                   <CategoryIcon category={item} />
-                  <span>
-                    {CATEGORY_LABELS[item].en}
-                    <small>{CATEGORY_LABELS[item].ja}</small>
-                  </span>
+                  <span>{CATEGORY_LABELS[item].ja}</span>
                 </button>
               ))}
             </div>
@@ -407,8 +389,8 @@ export default function PaletteEditor() {
             >
               <div className="section-title">
                 <h3>
-                  <span className="step-number">01</span>Shape
-                  <span>シルエット</span>
+                  <span className="step-number">01</span>
+                  <span>形</span>
                 </h3>
                 <span className="selection-name">
                   {shapeName(category, current.shape)}
@@ -445,8 +427,8 @@ export default function PaletteEditor() {
               </div>
               <div className="section-title color-section-title">
                 <h3>
-                  <span className="step-number">02</span>Color
-                  <span>カラー</span>
+                  <span className="step-number">02</span>
+                  <span>色</span>
                 </h3>
                 <span
                   className="color-dot"
@@ -459,8 +441,7 @@ export default function PaletteEditor() {
                 onChange={setColor}
               />
               <div className="presets-heading">
-                <span>Preset palette</span>
-                <span>気になる色から、ひとつ。</span>
+                <span>色見本</span>
               </div>
               <div
                 className="preset-grid"
@@ -505,7 +486,7 @@ export default function PaletteEditor() {
                   id="look-name"
                   value={name}
                   maxLength={40}
-                  placeholder="例：春待ちのピンク"
+                  placeholder="例：白いブラウスとピンクのスカート"
                   onChange={(event) => setName(event.target.value)}
                   onKeyDown={(event) => {
                     if (
@@ -557,12 +538,9 @@ export default function PaletteEditor() {
         >
           <div className="saved-heading">
             <div>
-              <span className="eyebrow">A COLLECTION OF YOU</span>
-              <h2 id="saved-heading">
-                Saved looks<span>保存したコーデ</span>
-              </h2>
+              <h2 id="saved-heading">保存したコーデ</h2>
             </div>
-            <span className="saved-total">{saved.length} LOOKS</span>
+            <span className="saved-total">{saved.length}件</span>
           </div>
           {!ready ? (
             <div className="saved-empty">
@@ -574,7 +552,7 @@ export default function PaletteEditor() {
                 <Bookmark size={23} strokeWidth={1.3} />
               </span>
               <div>
-                <strong>お気に入りの組み合わせを、ここに。</strong>
+                <strong>保存したコーデはまだありません。</strong>
                 <p>コーデを保存すると、いつでも呼び出して色を試せます。</p>
               </div>
               <ArrowDown size={19} aria-hidden="true" />
@@ -605,10 +583,10 @@ export default function PaletteEditor() {
                           <span
                             key={item}
                             style={{ backgroundColor: entry.look[item].color }}
-                            title={`${CATEGORY_LABELS[item].en} ${entry.look[item].color}`}
+                            title={`${CATEGORY_LABELS[item].ja} ${entry.look[item].color}`}
                           />
                         ))}
-                        <span className="saved-color-count">3 colors</span>
+                        <span className="saved-color-count">3色</span>
                       </div>
                     </div>
                   </button>
@@ -649,8 +627,7 @@ export default function PaletteEditor() {
           )}
         </section>
         <footer>
-          <span>MIRROR_PALETTE</span>
-          <p>いつもの服に、新しい「好き」を。</p>
+          <span>MIRROR PALETTE</span>
           <Sparkles size={16} aria-hidden="true" />
         </footer>
       </main>

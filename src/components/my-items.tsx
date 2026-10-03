@@ -90,12 +90,9 @@ export function MyItems({
     >
       <div className="saved-heading">
         <div>
-          <span className="eyebrow">YOUR WARDROBE</span>
-          <h2 id="my-items-heading">
-            My items<span>マイアイテム</span>
-          </h2>
+          <h2 id="my-items-heading">マイアイテム</h2>
         </div>
-        <span className="saved-total">{items.length} ITEMS</span>
+        <span className="saved-total">{items.length}点</span>
       </div>
       <div className="my-items-add">
         <p className="my-items-current">

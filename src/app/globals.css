@@ -2132,3 +2132,35 @@ footer > svg {
     white-space: normal;
   }
 }
+
+/* Functional labels use Sans; the brand and palette note retain Serif. */
+.preview-heading h2,
+.saved-heading h2 {
+  font-family: var(--sans);
+  font-size: 22px;
+}
+.section-title h3 {
+  font-family: var(--sans);
+  font-size: 18px;
+}
+.section-title h3 > span:last-child {
+  font-size: inherit;
+  font-weight: inherit;
+  color: inherit;
+}
+.step-number,
+.current-color > strong,
+.saved-color-count {
+  font-family: var(--sans);
+}
+.presets-heading > span:first-child {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: inherit;
+}
+@media (max-width: 480px) {
+  .preview-heading h2,
+  .saved-heading h2 {
+    font-size: 20px;
+  }
+}
