@@ -33,6 +33,26 @@ Replacement with the original IPA-licensed program (IPAex Mincho):
 Alternatively install ipaexm.ttf and override the three headings' font-family
 with "IPAexMincho" in the browser's user stylesheet.
 
+Japanese heading comparison: Shippori Mincho B1
+The active Japanese heading font in this comparison is Shippori Mincho B1
+Regular (400), from the Google Fonts distribution maintained from FONTDASU's
+ShipporiMincho project. The Honoka files above are retained from the parent.
+Only these headings use this font:
+編集中のコーデ / マイアイテム / 保存したコーデ
+The 16 heading characters are subsetted without changing their outlines or
+advance widths and served from this site's /fonts/typography/ directory.
+There are no runtime requests to Google Fonts or another font CDN.
+
+Copyright 2021 The Shippori Mincho Project Authors
+(https://github.com/fontdasu/ShipporiMincho)
+License: SIL Open Font License 1.1; see Shippori-Mincho-B1-OFL.txt.
+Source:
+https://github.com/google/fonts/tree/main/ofl/shipporiminchob1
+https://raw.githubusercontent.com/google/fonts/main/ofl/shipporiminchob1/ShipporiMinchoB1-Regular.ttf
+Source font version: 3.110.
+To reproduce with fonttools:
+python -m fontTools.subset ShipporiMinchoB1-Regular.ttf --text="編集中のコーデマイアイテム保存した" --flavor=woff --name-IDs="*" --name-languages="*" --name-legacy --layout-features="*" --output-file=shippori-mincho-b1-headings.woff
+
 Cinzel variable font: Copyright 2020 The Cinzel Project Authors.
 https://github.com/NDISCOVER/Cinzel
 Source: https://github.com/google/fonts/tree/main/ofl/cinzel

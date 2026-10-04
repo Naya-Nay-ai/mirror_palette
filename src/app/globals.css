@@ -2168,8 +2168,8 @@ footer > svg {
 /* Typography comparison: only the three Japanese section headings.
    Font license and source: /fonts/typography/README.txt */
 @font-face {
-  font-family: "Palette Mincho Comparison";
-  src: url("/fonts/typography/palette-mincho-comparison.woff") format("woff");
+  font-family: "Shippori Mincho B1";
+  src: url("/fonts/typography/shippori-mincho-b1-headings.woff") format("woff");
   font-style: normal;
   font-weight: 400;
   font-display: swap;
@@ -2177,7 +2177,7 @@ footer > svg {
 #look-heading,
 #my-items-heading,
 #saved-heading {
-  font-family: "Palette Mincho Comparison", serif;
+  font-family: "Shippori Mincho B1", serif;
   font-weight: 400;
   font-synthesis: none;
 }
