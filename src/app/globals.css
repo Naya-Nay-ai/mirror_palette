@@ -2164,3 +2164,33 @@ footer > svg {
     font-size: 20px;
   }
 }
+
+/* Typography comparison: only the three Japanese section headings.
+   Font license and source: /fonts/typography/README.txt */
+@font-face {
+  font-family: "Palette Mincho Comparison";
+  src: url("/fonts/typography/palette-mincho-comparison.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+#look-heading,
+#my-items-heading,
+#saved-heading {
+  font-family: "Palette Mincho Comparison", serif;
+  font-weight: 400;
+  font-synthesis: none;
+}
+
+/* Comparison B: brand only; Your palette retains Cormorant Garamond. */
+@font-face {
+  font-family: "Cinzel";
+  src: url("/fonts/typography/cinzel-variable.woff") format("woff");
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+}
+.brand-name,
+footer > span {
+  font-family: "Cinzel", serif;
+}
