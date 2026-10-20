@@ -38,3 +38,30 @@ https://github.com/NDISCOVER/Cinzel
 Source: https://github.com/google/fonts/tree/main/ofl/cinzel
 License: SIL Open Font License 1.1 (Cinzel-OFL.txt).
 The WOFF file is a lossless compression of the source TTF with its metadata.
+
+Shippori Antique + Zen Kaku Gothic New comparison (2026-10-20)
+Base commit: fb94d7a31143292d0088f2fcdc76a0abb40c03da
+Branch: compare/typography-antique-zen
+
+Shippori Antique (standard version, not B1) is used only for:
+編集中のコーデ / マイアイテム / 保存したコーデ
+Official upstream: https://github.com/fontdasu/ShipporiAntique
+Official Google Fonts distribution: https://github.com/google/fonts/tree/main/ofl/shipporiantique
+Self-hosted package: @fontsource/shippori-antique 5.3.0, Regular 400.
+Copyright 2020 The Shippori Antique Project Authors.
+License: SIL Open Font License 1.1; see ShipporiAntique-OFL.txt.
+
+Zen Kaku Gothic New replaces the previous Noto Sans JP UI/body family.
+Official upstream: https://github.com/googlefonts/zen-kakugothic
+Official Google Fonts distribution: https://github.com/google/fonts/tree/main/ofl/zenkakugothicnew
+Self-hosted package: @fontsource/zen-kaku-gothic-new 5.3.1, weights 400/500/700.
+Copyright 2022 The Zen Project Authors.
+License: SIL Open Font License 1.1; see ZenKakuGothicNew-OFL.txt.
+Existing CSS weights are retained; requests for 600 use the closest supplied
+weight (700) through standard CSS font matching.
+
+The pinned packages include unedited font files, metadata and copyright notices.
+Their WOFF2 assets are bundled and served by this app, with no Google Fonts/CDN
+stylesheet requests at runtime. Full license texts are copied beside this file.
+Cinzel, its existing size/position, and Cormorant Garamond for Your palette remain
+unchanged. No copy, sizing, spacing, colors, garment or storage behavior changes.
