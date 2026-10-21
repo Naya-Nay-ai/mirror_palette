@@ -1,6 +1,7 @@
-@import "@fontsource/noto-sans-jp/400.css";
-@import "@fontsource/noto-sans-jp/500.css";
-@import "@fontsource/noto-sans-jp/600.css";
+@import "@fontsource/zen-kaku-gothic-new/400.css";
+@import "@fontsource/zen-kaku-gothic-new/500.css";
+@import "@fontsource/zen-kaku-gothic-new/700.css";
+@import "@fontsource/shippori-antique/400.css";
 @import "@fontsource/cormorant-garamond/500.css";
 @import "@fontsource/cormorant-garamond/600.css";
 @import "@fontsource/cormorant-garamond/500-italic.css";
@@ -16,7 +17,7 @@
   --lavender: #eeeaf4;
   --mint: #e7f0ec;
   --sans:
-    "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    "Zen Kaku Gothic New", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --serif: "Cormorant Garamond", Georgia, serif;
 }
 * {
@@ -2167,17 +2168,10 @@ footer > svg {
 
 /* Typography comparison: only the three Japanese section headings.
    Font license and source: /fonts/typography/README.txt */
-@font-face {
-  font-family: "Palette Mincho Comparison";
-  src: url("/fonts/typography/palette-mincho-comparison.woff") format("woff");
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-}
 #look-heading,
 #my-items-heading,
 #saved-heading {
-  font-family: "Palette Mincho Comparison", serif;
+  font-family: "Shippori Antique", sans-serif;
   font-weight: 400;
   font-synthesis: none;
 }
